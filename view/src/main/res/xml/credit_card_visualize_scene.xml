@@ -7,10 +7,6 @@
         app:constraintSetEnd="@+id/end"
         app:duration="1000">
 
-        <OnSwipe
-            app:touchAnchorId="@+id/detailWrapperFront"
-            app:dragDirection="dragLeft"
-            app:touchAnchorSide="right" />
         <KeyFrameSet>
             <KeyAttribute
                 android:alpha="0"
@@ -22,34 +18,9 @@
                 app:framePosition="50"
                 app:motionTarget="@id/detailWrapperBack"/>
         </KeyFrameSet>
+        <OnClick app:targetId="@+id/detailWrapperFront" />
 
     </Transition>
-
-    <!--
-    <Transition
-        app:constraintSetStart="@+id/end"
-        app:constraintSetEnd="@+id/start"
-        app:duration="1000">
-        <OnSwipe
-            app:dragDirection="dragEnd"
-            app:touchAnchorId="@id/detailWrapperBack"
-            app:touchAnchorSide="start"/>
-
-        <KeyFrameSet>
-            <KeyAttribute
-                android:alpha="0"
-                app:framePosition="70"
-                app:motionTarget="@id/detailWrapperBack"/>
-
-            <KeyAttribute
-                android:alpha="0"
-                app:framePosition="50"
-                app:motionTarget="@id/detailWrapperFront"/>
-        </KeyFrameSet>
-
-    </Transition>
-    -->
-
 
     <ConstraintSet android:id="@+id/start">
         <Constraint
