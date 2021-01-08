@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CreditCardVisualize">
+        <attr name="cardUserName" format="string"/>
+        <attr name="cardNumber" format="string"/>
+    </declare-styleable>
+
+    <attr name="creditCardVisualize" format="reference"/>
+</resources>
