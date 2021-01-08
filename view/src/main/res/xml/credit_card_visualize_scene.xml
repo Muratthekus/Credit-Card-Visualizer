@@ -5,7 +5,7 @@
     <Transition
         app:constraintSetStart="@+id/start"
         app:constraintSetEnd="@+id/end"
-        app:duration="1000">
+        app:duration="700">
 
         <KeyFrameSet>
             <KeyAttribute

@@ -25,43 +25,49 @@
             android:src="@drawable/ic_credit_card"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cardType" />
+
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/cardType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:fontFamily="@font/credit_card_font"
             android:textSize="32sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:textColor="#ffffff"
             tools:text="VISA" />
-        <androidx.appcompat.widget.AppCompatEditText
+        <com.santalu.maskara.widget.MaskEditText
             android:id="@+id/cardNumber"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/credit_card_font"
-            android:maxLines="16"
+            app:maskStyle="completable"
+            app:mask="#### #### #### ####"
+            app:maskCharacter="#"
+            android:textColor="#ffffff"
             android:textSize="18sp"
             android:inputType="number"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cardChipImage"
-            tools:text="5600 3000 1220 6786" />
+            tools:text="5600300012206786" />
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/cardUserName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/credit_card_font"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cardNumber"
             android:inputType="text"
+            android:textColor="#ffffff"
             tools:text="FIKRET ANDAY" />
-        <androidx.appcompat.widget.AppCompatEditText
+        <com.santalu.maskara.widget.MaskEditText
             android:id="@+id/cardValidationDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -69,7 +75,11 @@
             android:fontFamily="@font/credit_card_font"
             app:layout_constraintEnd_toEndOf="parent"
             android:inputType="number"
+            android:textSize="14sp"
+            app:mask="##/##"
+            app:maskCharacter="#"
             app:layout_constraintTop_toTopOf="@id/cardUserName"
+            android:textColor="#ffffff"
             tools:text="20/22" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -109,8 +119,9 @@
             android:inputType="number"
             android:fontFamily="@font/credit_card_font"
             tools:text="332"
+            android:maxLength="3"
             android:gravity="center"
-            android:textSize="18sp"/>
+            android:textSize="16sp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

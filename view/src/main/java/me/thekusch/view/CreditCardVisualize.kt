@@ -28,9 +28,9 @@ class CreditCardVisualize @JvmOverloads constructor(
         this, true
     )
 
-
     private var _cardNumberHint = "ENTER CART NUMBER"
     private var _cardUserNameHint = "ENTER CART USER'S NAME"
+    private var _cardValidateDateHint = "VALID DATE"
 
     var cardUser: CharSequence?
         get() = binding.cardUserName.getValue()
@@ -39,9 +39,21 @@ class CreditCardVisualize @JvmOverloads constructor(
         }
 
     var cardNumber: CharSequence?
-        get() = binding.cardNumber.getValue()
+        get() = binding.cardNumber.unMasked
         set(value) {
             binding.cardNumber.setText(value)
+        }
+
+    var cardValidDate: CharSequence?
+        get() = binding.cardValidationDate.unMasked
+        set(value) {
+            binding.cardValidationDate.setText(value)
+        }
+
+    var cardCvcNumber: CharSequence?
+        get() = binding.cardCvc.getValue()
+        set(value) {
+            binding.cardCvc.setText(value)
         }
 
     init {
@@ -49,10 +61,9 @@ class CreditCardVisualize @JvmOverloads constructor(
         with(binding) {
             cardUserName.hint = _cardUserNameHint
             cardNumber.hint = _cardNumberHint
+            cardValidationDate.hint = _cardValidateDateHint
         }
-
     }
-
 
     private fun obtainStyledAttributes(attrs: AttributeSet?, defStyleAttr: Int) {
         val typedArray = context.theme.obtainStyledAttributes(
@@ -71,6 +82,12 @@ class CreditCardVisualize @JvmOverloads constructor(
                 cardUser = getString(
                     R.styleable.CreditCardVisualize_cardUserName
                 )
+                cardValidDate = getString(
+                    R.styleable.CreditCardVisualize_cardValidDate
+                )
+                cardCvcNumber = getString(
+                    R.styleable.CreditCardVisualize_cardCvcNumber
+                )
             }
         } catch (e: Exception) {
             // ignored
@@ -78,8 +95,23 @@ class CreditCardVisualize @JvmOverloads constructor(
             typedArray.recycle()
         }
     }
-    private fun AppCompatEditText.getValue(): String? {
+    private fun AppCompatEditText.getValue(): String {
         return this.text.toString()
     }
 
+    fun getCardsValue(): Entity {
+        return Entity(
+            cardNumber = cardNumber.toString(),
+            cardCvcNumber = cardCvcNumber.toString(),
+            cardUsersName = cardUser.toString(),
+            cardValidDate = cardValidDate.toString()
+        )
+    }
+
+    data class Entity(
+        val cardNumber: String?,
+        val cardUsersName: String?,
+        val cardValidDate: String?,
+        val cardCvcNumber: String?
+    )
 }

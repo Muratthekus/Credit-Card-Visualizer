@@ -3,6 +3,8 @@
     <declare-styleable name="CreditCardVisualize">
         <attr name="cardUserName" format="string"/>
         <attr name="cardNumber" format="string"/>
+        <attr name="cardValidDate" format="string"/>
+        <attr name="cardCvcNumber" format="string"/>
     </declare-styleable>
 
     <attr name="creditCardVisualize" format="reference"/>
