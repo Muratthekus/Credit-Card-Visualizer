@@ -1,5 +1,6 @@
 package me.thekusch.view
 
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.util.AttributeSet
 import android.util.Log
@@ -10,20 +11,25 @@ import android.view.View
 import android.widget.FrameLayout
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.constraintlayout.motion.widget.MotionLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.GestureDetectorCompat
 import me.thekusch.view.databinding.CreditCardVisualizeBinding
+import kotlin.math.abs
 import kotlin.math.atan2
 
 class CreditCardVisualize @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = R.attr.creditCardVisualize
-): MotionLayout(context, attrs, defStyleAttr),View.OnScrollChangeListener{
+): ConstraintLayout(context, attrs, defStyleAttr),View.OnTouchListener{
 
     private val binding: CreditCardVisualizeBinding = CreditCardVisualizeBinding.inflate(
         LayoutInflater.from(context),
         this, true
     )
+
+    private var x1=0
+    private var x2 = 0
 
     private lateinit var  gestureDetectorCompat: GestureDetectorCompat
 
@@ -49,30 +55,62 @@ class CreditCardVisualize @JvmOverloads constructor(
             cardNumber.hint = _cardNumberHint
 
         }
-        binding.detailWrapperFront.setOnScrollChangeListener(this)
-        gestureDetectorCompat = GestureDetectorCompat(context,
-            object : GestureDetector.SimpleOnGestureListener() {
-                override fun onScroll(
-                    e1: MotionEvent?,
-                    e2: MotionEvent?,
-                    distanceX: Float,
-                    distanceY: Float
-                ): Boolean {
-                    val angle = Math.toDegrees(
-                        atan2(
-                            (e1!!.y - e2!!.y).toDouble(),
-                            (e2.x - e1.x).toDouble()
-                        )
-                    ).toFloat()
-                    if(angle > -45 && angle < 45) {
-                        binding.motionLayout.transitionToEnd()
-                        Log.d("DENEME","LEFFTTT")
-                        return true
-                    }
-                    return false
-                }
-            })
 
+        gestureDetectorCompat = GestureDetectorCompat(context,GestureListener())
+    }
+
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        Log.d("DENEMELER","NABERSİN")
+        when(event?.action) {
+            MotionEvent.ACTION_DOWN -> {
+                x1 = event.x.toInt()
+                return true
+            }
+            MotionEvent.ACTION_UP -> {
+                x2 = event.x.toInt()
+                performClick()
+                return true
+            }
+        }
+        return false
+    }
+
+    override fun performClick(): Boolean {
+        super.performClick()
+        if(x2 > x1) {
+            swipeLeft()
+        }
+        return true
+    }
+
+
+   inner class GestureListener: GestureDetector.SimpleOnGestureListener() {
+        override fun onDown(e: MotionEvent?): Boolean {
+            return true
+        }
+
+        override fun onFling(
+            e1: MotionEvent?,
+            e2: MotionEvent?,
+            velocityX: Float,
+            velocityY: Float
+        ): Boolean {
+            var diffY: Float? = e2?.y?.minus(e1?.y!!)
+            var diffX: Float? = e2?.x?.minus(e1?.x!!)
+            if(abs(diffX!!) > 100 && velocityX > 100) {
+                if(diffX >0) {
+                    swipeLeft()
+                    return true
+                }
+            }
+            return false
+        }
+    }
+    private fun swipeLeft() {
+        ObjectAnimator.ofFloat(binding.detailWrapperFront,"scaleX",-1f).apply {
+            duration = 2000
+            start()
+        }
     }
 
     private fun obtainStyledAttributes(attrs: AttributeSet?, defStyleAttr: Int) {
@@ -103,20 +141,7 @@ class CreditCardVisualize @JvmOverloads constructor(
         return this.text.toString()
     }
 
-    override fun onScrollChange(
-        v: View?,
-        scrollX: Int,
-        scrollY: Int,
-        oldScrollX: Int,
-        oldScrollY: Int
-    ) {
-        Log.d("DENEME","KAYDIRRRMA")
-        when(v?.id) {
-            R.id.detailWrapperFront -> {
-                if(scrollX > oldScrollX) {
-                    Log.d("DENEME","KAYDIRRR")
-                }
-            }
-        }
+    override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+        return gestureDetectorCompat.onTouchEvent(event)
     }
 }
