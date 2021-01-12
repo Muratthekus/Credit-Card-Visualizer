@@ -76,6 +76,7 @@ class CreditCardVisualize @JvmOverloads constructor(
                 cardUserName.setHintTextColor(_defaultHintColor)
                 cardValidationDate.setHintTextColor(_defaultHintColor)
                 cardType.setHintTextColor(_defaultHintColor)
+                creditCard.setCardBackgroundColor(cardBackgroundColor)
             }
         }
     init {
