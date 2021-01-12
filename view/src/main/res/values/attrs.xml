@@ -5,6 +5,8 @@
         <attr name="cardNumber" format="string"/>
         <attr name="cardValidDate" format="string"/>
         <attr name="cardCvcNumber" format="string"/>
+        <attr name="cardBackgroundColor" format="color"/>
+        <attr name="cardTextHintColor" format="color"/>
     </declare-styleable>
 
     <attr name="creditCardVisualize" format="reference"/>

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="cardDefaultColor">#2865AF</color>
+    <color name="defaultHintColor">#ffffff</color>
 </resources>
