@@ -48,6 +48,6 @@ Use getCardValue() method to access card number, cvc, validation date and user's
 **Card user's name must be written uppercase**
 
 <p align="center">
-  <img width="460" height="1920" src="https://user-images.githubusercontent.com/45212967/104377349-6f12d700-5537-11eb-9f83-b22bbf28bf7f.gif">
+  <img width="460" height="920" src="https://user-images.githubusercontent.com/45212967/104377349-6f12d700-5537-11eb-9f83-b22bbf28bf7f.gif">
 </p>
 
