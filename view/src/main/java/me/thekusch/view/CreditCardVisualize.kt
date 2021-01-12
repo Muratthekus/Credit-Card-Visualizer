@@ -30,7 +30,7 @@ class CreditCardVisualize @JvmOverloads constructor(
         this, true
     )
 
-    private var _cardNumberHint = "ENTER CART NUMBER"
+    private var _cardNumberHint = "ENTER CARD NUMBER"
     private var _cardUserNameHint = "OWNER NAME"
     private var _cardValidateDateHint = "VALID DATE"
     @ColorInt private var _defaultCardColor = getDefaultColor()
